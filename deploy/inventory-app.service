@@ -1,0 +1,19 @@
+# Install at /etc/systemd/system/inventory-app.service then:
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now inventory-app
+
+[Unit]
+Description=Inventory app (Next.js)
+After=network.target
+
+[Service]
+Type=simple
+User=deploy
+WorkingDirectory=/home/deploy/inventory-app
+EnvironmentFile=/home/deploy/inventory-app/.env.production
+ExecStart=/usr/bin/npm run start
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
